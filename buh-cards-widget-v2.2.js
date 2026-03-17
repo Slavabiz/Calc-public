@@ -2,22 +2,22 @@
 (function(){
 "use strict";
 var V="2.2.0",CID="buh-cards",CTA="#order";
-var WEBHOOK="https://script.google.com/macros/s/AKfycbxhsiQ6X1JtWXmvrcFoEPpgdkLDCv51Lwu33Jbg_8pbF-cMmbJ9uuGL7ulPheePTPLF6g/exec";
+var WEBHOOK="https://script.google.com/macros/s/AKfycbym1zvHu5VtcuHSA6XwxuMaMDidPP8o9hnnjY2hhvdzB5tqQlmEd6gDDQQUsWsJG7PTnw/exec";
 var CDN="https://cdn.jsdelivr.net/gh/Slavabiz/Calc-public@main/";
 
 var D=[
-{id:1,n:"Елена Петрова",ph:CDN+"1.jpeg",exp:"12 лет",r:4.9,rev:63,sk:["IT-сфера","Малый бизнес","Услуги"],ind:["Производство","Строительство и ремонт"],ent:["ИП","ООО"],srv:["Работа с первичкой","Сдача отчетности"]},
-{id:2,n:"Ольга Кузнецова",ph:CDN+"2.jpeg",exp:"8 лет",r:4.8,rev:41,sk:["Торговля","Маркетплейсы"],ind:["Розничная торговля","Оптовая торговля"],ent:["ООО","АО"],srv:["Ведение учёта","Налоговое планирование"]},
-{id:3,n:"Наталья Смирнова",ph:CDN+"3.jpeg",exp:"15 лет",r:5.0,rev:87,sk:["ОСНО","НДС","Аудит"],ind:["Логистика","Транспорт"],ent:["ИП","ООО","АО"],srv:["Восстановление учёта","Сдача отчетности","Консультации"]},
-{id:4,n:"Ирина Волкова",ph:CDN+"4.jpeg",exp:"10 лет",r:4.7,rev:34,sk:["Строительство","Госзакупки","Сметы"],ind:["Строительство","Проектирование"],ent:["ООО"],srv:["Работа с первичкой","Ведение учёта"]},
-{id:5,n:"Татьяна Лебедева",ph:CDN+"5.jpeg",exp:"7 лет",r:4.9,rev:52,sk:["Маркетплейсы","E-commerce","Блогеры"],ind:["Интернет-торговля","Реклама и маркетинг"],ent:["ИП","Самозанятые"],srv:["Сдача отчетности","Налоговое планирование","Консультации"]}
+{id:1,n:"Елена Петрова",ph:CDN+"1.png",exp:"12 лет",r:4.9,rev:63,sk:["IT-сфера","Малый бизнес","Услуги"],ind:["Производство","Строительство и ремонт"],ent:["ИП","ООО"],srv:["Работа с первичкой","Сдача отчетности"]},
+{id:2,n:"Ольга Кузнецова",ph:CDN+"2.png",exp:"8 лет",r:4.8,rev:41,sk:["Торговля","Маркетплейсы"],ind:["Розничная торговля","Оптовая торговля"],ent:["ООО","АО"],srv:["Ведение учёта","Налоговое планирование"]},
+{id:3,n:"Наталья Смирнова",ph:CDN+"3.png",exp:"15 лет",r:5.0,rev:87,sk:["ОСНО","НДС","Аудит"],ind:["Логистика","Транспорт"],ent:["ИП","ООО","АО"],srv:["Восстановление учёта","Сдача отчетности","Консультации"]},
+{id:4,n:"Ирина Волкова",ph:CDN+"4.png",exp:"10 лет",r:4.7,rev:34,sk:["Строительство","Госзакупки","Сметы"],ind:["Строительство","Проектирование"],ent:["ООО"],srv:["Работа с первичкой","Ведение учёта"]},
+{id:5,n:"Татьяна Лебедева",ph:CDN+"5.png",exp:"7 лет",r:4.9,rev:52,sk:["Маркетплейсы","E-commerce","Блогеры"],ind:["Интернет-торговля","Реклама и маркетинг"],ent:["ИП","Самозанятые"],srv:["Сдача отчетности","Налоговое планирование","Консультации"]}
 ];
 
-/* ── Analytics ── */
+/* ── Analytics (GET pixel — no CORS issues) ── */
 function track(event,accountant,direction){
-var p={event:event,accountant:accountant||"",direction:direction||"",url:location.href,ua:navigator.userAgent};
-console.log("[buh-cards] track:",p);
-try{fetch(WEBHOOK,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain"},body:JSON.stringify(p)});}catch(e){}
+var params="?event="+encodeURIComponent(event)+"&accountant="+encodeURIComponent(accountant||"")+"&direction="+encodeURIComponent(direction||"")+"&url="+encodeURIComponent(location.href)+"&ua="+encodeURIComponent(navigator.userAgent)+"&_t="+Date.now();
+console.log("[buh-cards] track:",event,accountant||"",direction||"");
+try{var img=new Image();img.src=WEBHOOK+params;}catch(e){}
 }
 
 /* ── Icons (inline SVG) ── */
